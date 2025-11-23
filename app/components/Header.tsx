@@ -26,6 +26,30 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
+
+  const themeToggleTitle = theme === 'default' ? 'Mode Noir & Blanc' : 'Mode Couleur';
+  const themeIcon = theme === 'default' ? (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <circle cx="12" cy="12" r="5" />
+      <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+    </svg>
+  ) : (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+    </svg>
+  );
+
   return (
     <>
       <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
@@ -93,18 +117,9 @@ export default function Header() {
                 className={styles.searchTrigger}
                 onClick={toggleTheme}
                 aria-label="Changer de thème"
-                title={theme === 'default' ? 'Mode Noir & Blanc' : 'Mode Couleur'}
+                title={themeToggleTitle}
               >
-                {theme === 'default' ? (
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <circle cx="12" cy="12" r="5" />
-                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
-                  </svg>
-                ) : (
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-                  </svg>
-                )}
+                {themeIcon}
               </button>
 
               <StationSelector />
@@ -132,45 +147,78 @@ export default function Header() {
 
       {/* Full Screen Mobile Navigation Overlay */}
       <div className={`${styles.mobileNavOverlay} ${mobileMenuOpen ? styles.open : ''}`}>
-        <nav className={styles.mobileNavLinks}>
-          <Link 
-            href="/" 
-            className={`${styles.mobileNavLink} ${pathname === '/' ? styles.active : ''}`}
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            Accueil
-          </Link>
-          <Link 
-            href="/radio-live" 
-            className={`${styles.mobileNavLink} ${pathname === '/radio-live' ? styles.active : ''}`}
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            Radio en Direct
-          </Link>
-          <Link 
-            href="/podcasts" 
-            className={`${styles.mobileNavLink} ${pathname === '/podcasts' ? styles.active : ''}`}
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            Podcasts
-          </Link>
-          <Link 
-            href="/admin" 
-            className={`${styles.mobileNavLink} ${pathname === '/admin' ? styles.active : ''}`}
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            Admin Demo
-          </Link>
-        </nav>
+        <div className={styles.mobileNavPanel}>
+          <div className={styles.mobileNavHeader}>
+            <Link 
+              href="/" 
+              className={styles.mobileBranding}
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <span className={styles.mobileBrandName}>RDL 68</span>
+              <span className={styles.mobileBrandTagline}>RADIO DREYECKLAND LIBRE</span>
+            </Link>
 
-        <div className={styles.mobileNavActions}>
-          <Link 
-            href="/radio-live" 
-            className="btn btn-primary btn-lg"
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            Écouter le Direct
-          </Link>
+            <div className={styles.mobileUtilityButtons}>
+              <button
+                className={styles.mobileIconButton}
+                onClick={toggleTheme}
+                aria-label="Changer de thème"
+                title={themeToggleTitle}
+              >
+                {themeIcon}
+              </button>
+              <button
+                className={styles.mobileIconButton}
+                onClick={() => setMobileMenuOpen(false)}
+                aria-label="Fermer le menu"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M18 6L6 18M6 6L18 18" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <nav className={styles.mobileNavLinks}>
+            <Link 
+              href="/" 
+              className={`${styles.mobileNavLink} ${pathname === '/' ? styles.active : ''}`}
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Accueil
+            </Link>
+            <Link 
+              href="/radio-live" 
+              className={`${styles.mobileNavLink} ${pathname === '/radio-live' ? styles.active : ''}`}
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Radio en Direct
+            </Link>
+            <Link 
+              href="/podcasts" 
+              className={`${styles.mobileNavLink} ${pathname === '/podcasts' ? styles.active : ''}`}
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Podcasts
+            </Link>
+            <Link 
+              href="/admin" 
+              className={`${styles.mobileNavLink} ${pathname === '/admin' ? styles.active : ''}`}
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Admin Demo
+            </Link>
+          </nav>
+
+          <div className={styles.mobileNavActions}>
+            <Link 
+              href="/radio-live" 
+              className="btn btn-primary btn-lg"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Écouter le Direct
+            </Link>
+          </div>
         </div>
       </div>
     </>

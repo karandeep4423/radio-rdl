@@ -93,6 +93,10 @@
   --hero-overlay-end: rgba(10, 10, 10, 0.6);
   --hero-text: #ffffff;
   --hero-text-secondary: rgba(255, 255, 255, 0.9);
+  --mobile-overlay-bg: rgba(10, 10, 10, 0.94);
+  --mobile-overlay-panel-bg: rgba(15, 15, 15, 0.95);
+  --mobile-overlay-border: rgba(255, 255, 255, 0.08);
+  --mobile-overlay-surface: rgba(255, 255, 255, 0.04);
 }
 
 [data-theme='monochrome'] {
@@ -128,6 +132,10 @@
   --hero-overlay-end: rgba(255, 255, 255, 0.7);
   --hero-text: #000000;
   --hero-text-secondary: #404040;
+  --mobile-overlay-bg: rgba(255, 255, 255, 0.92);
+  --mobile-overlay-panel-bg: rgba(255, 255, 255, 0.9);
+  --mobile-overlay-border: rgba(0, 0, 0, 0.1);
+  --mobile-overlay-surface: rgba(0, 0, 0, 0.04);
 
   /* Remove colored shadows/glows */
   --shadow-glow: 0 0 20px rgba(0, 0, 0, 0.1);
