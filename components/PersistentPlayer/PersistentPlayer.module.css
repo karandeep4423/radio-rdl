@@ -1,0 +1,329 @@
+.persistentPlayer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: var(--player-bg);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-top: 1px solid var(--glass-border);
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
+    animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Light (monochrome) theme adjustments for persistent player */
+:global([data-theme='monochrome']) .persistentPlayer {
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+.playerContent {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    gap: 32px;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+/* Now Playing Section */
+.nowPlaying {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex: 1;
+    min-width: 0;
+}
+
+.vinylContainer {
+    flex-shrink: 0;
+    position: relative;
+}
+
+.vinyl {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    position: relative;
+}
+
+.vinyl::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.1) 100%);
+    pointer-events: none;
+}
+
+.vinylSvg {
+    width: 100%;
+    height: 100%;
+}
+
+.spinning {
+    animation: spin 4s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.trackInfo {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.stationName {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    opacity: 0.8;
+}
+
+.trackTitle {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.showName {
+    font-size: 0.85rem;
+    color: var(--color-text-tertiary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Controls */
+.controls {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.playButton {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    transition: all var(--transition-base);
+    box-shadow: 0 4px 20px rgba(225, 29, 72, 0.4);
+    flex-shrink: 0;
+}
+
+.playButton:hover {
+    transform: scale(1.05);
+    background: var(--color-primary-hover);
+    box-shadow: 0 8px 25px rgba(225, 29, 72, 0.6);
+}
+
+.playButton:active {
+    transform: scale(0.95);
+}
+
+/* Light (monochrome) theme: keep play button accent red */
+:global([data-theme='monochrome']) .playButton {
+    background: linear-gradient(135deg, #ff1f4a, #ff4b7a);
+    color: #ffffff;
+    box-shadow: 0 8px 24px rgba(255, 31, 74, 0.4);
+}
+
+.volumeControl {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 8px 16px;
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.muteButton {
+    background: none;
+    border: none;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color var(--transition-fast);
+}
+
+.muteButton:hover {
+    color: var(--color-text-primary);
+}
+
+.volumeSlider {
+    width: 100px;
+    height: 4px;
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.1);
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+}
+
+.volumeSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color-text-primary);
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    transition: all var(--transition-fast);
+}
+
+:global([data-theme='monochrome']) .volumeSlider::-webkit-slider-thumb,
+:global([data-theme='monochrome']) .volumeSlider::-moz-range-thumb {
+    background: #ff1f4a;
+    box-shadow: 0 0 10px rgba(255, 59, 48, 0.4);
+}
+
+.volumeSlider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+.volumeValue {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    min-width: 32px;
+    text-align: right;
+}
+
+.expandButton {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    color: var(--color-text-secondary);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.expandButton:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--color-primary);
+    color: var(--color-text-primary);
+    transform: translateY(-2px);
+}
+
+/* Make controls/cards more neutral in monochrome (light) theme for readability */
+:global([data-theme='monochrome']) .volumeControl,
+:global([data-theme='monochrome']) .expandButton {
+    background: var(--color-bg-tertiary);
+    border-color: var(--color-border);
+}
+
+:global([data-theme='monochrome']) .volumeSlider {
+    background: var(--color-bg-secondary);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .volumeSlider {
+        width: 80px;
+    }
+
+    .expandText {
+        display: none;
+    }
+
+    .expandButton {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .playerContent {
+        padding: 12px 16px;
+        gap: 16px;
+    }
+
+    .vinyl {
+        width: 48px;
+        height: 48px;
+    }
+
+    .playButton {
+        width: 48px;
+        height: 48px;
+    }
+
+    .volumeControl {
+        background: none;
+        border: none;
+        padding: 0;
+    }
+
+    .volumeSlider,
+    .volumeValue {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .playerContent {
+        flex-direction: column;
+        gap: 16px;
+        padding-bottom: 24px;
+        /* Safe area for mobile */
+    }
+
+    .nowPlaying {
+        width: 100%;
+    }
+
+    .controls {
+        width: 100%;
+        justify-content: space-between;
+    }
+}

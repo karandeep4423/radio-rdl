@@ -1,0 +1,655 @@
+.radioLivePage {
+    min-height: 100vh;
+}
+
+/* Player Section */
+.playerSection {
+    padding: var(--spacing-3xl) 0;
+    background:
+        radial-gradient(circle at 30% 30%, rgba(255, 59, 48, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 70% 70%, rgba(255, 45, 85, 0.15) 0%, transparent 50%);
+}
+
+/* Light (monochrome) theme adjustments for hero background and badges */
+:global([data-theme='monochrome']) .playerSection {
+    background:
+        linear-gradient(to bottom, var(--hero-overlay-start), var(--hero-overlay-end));
+}
+
+.playerCard {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-3xl);
+    box-shadow: var(--shadow-xl);
+}
+
+.liveHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-lg);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.liveIndicator {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: rgba(255, 59, 48, 0.1);
+    border: 1px solid rgba(255, 59, 48, 0.3);
+    border-radius: var(--radius-md);
+}
+
+.liveDot {
+    width: 10px;
+    height: 10px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+    box-shadow: 0 0 12px var(--color-primary);
+}
+
+.liveText {
+    font-size: var(--font-size-sm);
+    font-weight: 700;
+    color: var(--color-primary);
+    letter-spacing: 0.1em;
+}
+
+.frequency {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    font-family: var(--font-display);
+}
+
+/* Now Playing Large */
+.nowPlayingLarge {
+    display: flex;
+    gap: var(--spacing-2xl);
+    align-items: center;
+    margin-bottom: var(--spacing-2xl);
+}
+
+.albumArtLarge {
+    width: 200px;
+    height: 200px;
+    flex-shrink: 0;
+}
+
+.vinylAnimation {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vinylAnimation svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.3));
+}
+
+.spinning {
+    animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.trackDetails {
+    flex: 1;
+}
+
+.showTitle {
+    font-size: var(--font-size-4xl);
+    font-weight: 800;
+    margin: 0 0 var(--spacing-sm) 0;
+    color: var(--color-text-primary);
+}
+
+.showHost {
+    font-size: var(--font-size-xl);
+    color: var(--color-text-secondary);
+    margin: 0 0 var(--spacing-md) 0;
+    font-weight: 500;
+}
+
+.currentTrack {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: var(--font-size-base);
+    color: var(--color-text-tertiary);
+    margin: 0;
+}
+
+/* Player Controls */
+.playerControls {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2xl);
+    padding: var(--spacing-xl);
+    background: var(--color-bg-tertiary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--spacing-lg);
+    flex-wrap: wrap;
+}
+
+.playButton {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-primary);
+    transition: all var(--transition-base);
+    box-shadow: var(--shadow-md), var(--shadow-glow);
+    flex-shrink: 0;
+}
+
+.playButton:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-lg), 0 0 30px rgba(255, 59, 48, 0.5);
+}
+
+.playButton:active {
+    transform: scale(0.98);
+}
+
+/* Light (monochrome) theme: make main play button clearly red */
+:global([data-theme='monochrome']) .playButton {
+    background: linear-gradient(135deg, #ff1f4a, #ff4b7a) !important;
+    color: #ffffff;
+    box-shadow: 0 10px 30px rgba(255, 31, 74, 0.5) !important;
+}
+
+.volumeControl {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    flex: 1;
+}
+
+.volumeControl svg {
+    color: var(--color-text-secondary);
+    flex-shrink: 0;
+}
+
+.volumeSlider {
+    flex: 1;
+    height: 6px;
+    border-radius: var(--radius-full);
+    background: var(--color-bg-secondary);
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+}
+
+.volumeSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(255, 59, 48, 0.4);
+    transition: all var(--transition-fast);
+}
+
+.volumeSlider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 4px 12px rgba(255, 59, 48, 0.6);
+}
+
+.volumeSlider::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 8px rgba(255, 59, 48, 0.4);
+    transition: all var(--transition-fast);
+}
+
+.volumeSlider::-moz-range-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 4px 12px rgba(255, 59, 48, 0.6);
+}
+
+:global([data-theme='monochrome']) .volumeSlider::-webkit-slider-thumb,
+:global([data-theme='monochrome']) .volumeSlider::-moz-range-thumb {
+    background: #ff1f4a !important;
+    box-shadow: 0 0 10px rgba(255, 59, 48, 0.5) !important;
+}
+
+.volumeValue {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    min-width: 45px;
+    text-align: right;
+}
+
+/* Share Buttons */
+.shareButtons {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+}
+
+.shareButton {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    background: var(--color-bg-tertiary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    font-family: var(--font-primary);
+}
+
+.shareButton:hover {
+    background: var(--color-bg-elevated);
+    border-color: var(--color-border-hover);
+    color: var(--color-text-primary);
+    transform: translateY(-2px);
+}
+
+/* Station Selector Section */
+.stationSection {
+    padding: var(--spacing-3xl) 0;
+    background: var(--color-bg-secondary);
+}
+
+.stationSection h2 {
+    text-align: center;
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--spacing-sm);
+}
+
+.stationDescription {
+    text-align: center;
+    color: var(--color-text-tertiary);
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--spacing-2xl);
+}
+
+.categoryFilters {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    margin-bottom: var(--spacing-2xl);
+    flex-wrap: wrap;
+}
+
+.categoryButton {
+    padding: var(--spacing-sm) var(--spacing-xl);
+    background: var(--color-bg-tertiary);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-full);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    font-family: var(--font-primary);
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+.categoryButton:hover {
+    background: var(--color-bg-elevated);
+    border-color: var(--color-primary);
+    color: var(--color-text-primary);
+}
+
+.categoryButton.active {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+    border-color: var(--color-primary);
+    color: var(--color-text-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.stationGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+    animation: fadeIn 0.5s ease-out;
+}
+
+.stationCard {
+    position: relative;
+    background: var(--color-bg-primary);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+.stationCard:hover {
+    background: var(--color-bg-elevated);
+    border-color: var(--color-border-hover);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.stationCard.activeStation {
+    background: var(--color-bg-elevated);
+    border-width: 2px;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(255, 59, 48, 0.3);
+}
+
+.stationHeader {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+}
+
+.stationColor {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-sm);
+    flex-shrink: 0;
+}
+
+.stationCategory {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.stationName {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0 0 var(--spacing-sm) 0;
+    font-family: var(--font-display);
+}
+
+.stationDesc {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-tertiary);
+    line-height: 1.5;
+    margin: 0;
+}
+
+.nowPlayingBadge {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-xs) var(--spacing-md);
+    background: rgba(255, 59, 48, 0.1);
+    border: 1px solid rgba(255, 59, 48, 0.3);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    color: var(--color-primary);
+    width: fit-content;
+}
+
+:global([data-theme='monochrome']) .liveIndicator,
+:global([data-theme='monochrome']) .nowPlayingBadge,
+:global([data-theme='monochrome']) .currentBadge,
+:global([data-theme='monochrome']) .infoIcon {
+    background: var(--color-bg-tertiary);
+    border-color: var(--color-border);
+}
+
+/* Schedule Section */
+.scheduleSection {
+    padding: var(--spacing-3xl) 0;
+}
+
+.scheduleSection h2 {
+    margin-bottom: var(--spacing-xl);
+}
+
+.scheduleGrid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.programCard {
+    display: grid;
+    grid-template-columns: minmax(90px, 150px) minmax(0, 1fr) auto;
+    gap: var(--spacing-lg);
+    padding: var(--spacing-lg);
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-base);
+    align-items: start;
+}
+
+.timeLabel {
+    font-family: var(--font-display);
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+.duration {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    font-weight: 500;
+}
+
+.programInfo h3 {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    margin: 0 0 var(--spacing-xs) 0;
+    color: var(--color-text-primary);
+}
+
+.programInfo {
+    min-width: 0;
+}
+
+.programHost {
+    font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
+    margin: 0 0 var(--spacing-sm) 0;
+    font-weight: 500;
+}
+
+.programDescription {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-tertiary);
+    line-height: 1.6;
+    margin: 0;
+    min-width: 0;
+}
+
+.currentBadge {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    background: rgba(255, 59, 48, 0.1);
+    border: 1px solid rgba(255, 59, 48, 0.3);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    color: var(--color-primary);
+    height: fit-content;
+}
+
+/* Info Section */
+.infoSection {
+    padding: var(--spacing-3xl) 0;
+    background: var(--color-bg-secondary);
+}
+
+.infoCard {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.infoIcon {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 59, 48, 0.1);
+    border: 1px solid rgba(255, 59, 48, 0.3);
+    border-radius: var(--radius-lg);
+    color: var(--color-primary);
+}
+
+.infoCard h3 {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    margin: 0;
+    color: var(--color-text-primary);
+}
+
+.infoValue {
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    font-family: var(--font-display);
+    color: var(--color-primary);
+    margin: 0;
+}
+
+.infoDescription {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-tertiary);
+    margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .nowPlayingLarge {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .albumArtLarge {
+        width: 180px;
+        height: 180px;
+    }
+
+    .playerControls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .volumeControl {
+        width: 100%;
+    }
+
+    .programCard {
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--spacing-md);
+    }
+
+    .currentBadge {
+        justify-self: flex-start;
+    }
+}
+
+@media (max-width: 768px) {
+    .playerCard {
+        padding: var(--spacing-xl);
+    }
+
+    .liveHeader {
+        flex-direction: column;
+        gap: var(--spacing-md);
+        align-items: flex-start;
+    }
+
+    .nowPlayingLarge {
+        gap: var(--spacing-lg);
+    }
+
+    .albumArtLarge {
+        width: 150px;
+        height: 150px;
+    }
+
+    .showTitle {
+        font-size: var(--font-size-2xl);
+    }
+
+    .showHost {
+        font-size: var(--font-size-lg);
+    }
+
+    .playerControls {
+        flex-direction: column;
+        gap: var(--spacing-lg);
+    }
+
+    .volumeControl {
+        width: 100%;
+    }
+
+    .programCard {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+
+    .currentBadge {
+        justify-self: flex-start;
+    }
+
+    .stationGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .categoryFilters {
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding-bottom: var(--spacing-sm);
+    }
+}
+
+@media (max-width: 480px) {
+    .playButton {
+        width: 70px;
+        height: 70px;
+    }
+
+    .playButton svg {
+        width: 28px;
+        height: 28px;
+    }
+}
